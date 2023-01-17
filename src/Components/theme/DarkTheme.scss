@@ -1,0 +1,22 @@
+@import 'src/scss/variables.scss';
+
+.night {
+        fill:#fff;
+
+    }
+.day {
+        fill: black;
+}
+
+.DarkTheme{
+margin-right: 10px;
+cursor: pointer;
+&:hover path{
+        fill: $orange;
+}
+
+}
+button{
+        border: none;
+        background-color: transparent;
+}
