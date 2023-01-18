@@ -1,5 +1,5 @@
-# pizza-shop
-Pizza shop web using React/Redux/Typescript
+# Магазин пиццы
+Магазин пиццы в React/Redux/Typescript
 
 📝 Фулл стек:
 - ReactJS
