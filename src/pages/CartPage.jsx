@@ -3,7 +3,7 @@ import CartItem from '../Components/CartItem';
 import Header from '../Components/Header';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart } from '../redux/reducers/cartSlice';
+import { cartSelector, clearCart } from '../redux/reducers/cartSlice';
 import CartEmpty from '../Components/CartEmpty';
 import { Link } from 'react-router-dom';
 
@@ -12,13 +12,16 @@ const CartPage = () => {
 
     const dispatch = useDispatch()
 
-    const { items, cartPriceTotal } = useSelector((state) => (state.cartSlice))
+    //Счетчик пицц и общей стоимости
+    const { items, cartPriceTotal } = useSelector(cartSelector)
 
+    //Очистка карзины
     const onClickClear = () => {
         if (window.confirm('Очистить корзину?')) {
             dispatch(clearCart())
         }
     }
+    //Получаем общее кол-во пицц в корзине
     const totalCount = items.reduce((sum, item) => sum + item.count, 0)
 
     return (
@@ -41,7 +44,6 @@ const CartPage = () => {
                                     <path d="M8.33337 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                     <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-
                                 <span>Очистить корзину</span>
                             </div >
                         </div >
@@ -58,7 +60,7 @@ const CartPage = () => {
                                 <span> Сумма заказа: <b>{cartPriceTotal} ₽</b> </span>
                             </div >
                             <div className="cart__bottom-buttons" >
-                                <Link to={'/'} className="button button--outline button--add go-back-btn" >
+                                <Link to={'/'} className="button button--outline go-back-btn" >
                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>

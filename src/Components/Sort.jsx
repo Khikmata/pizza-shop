@@ -16,8 +16,10 @@ const Sort = () => {
 
     const sort = useSelector(state => state.filterSlice.sort);
 
+    //Видимость модульного окна
     const [visible, setVisible] = useState(false);
 
+    //Ссылка для модульного окна
     const sortRef = useRef()
 
 
@@ -76,9 +78,6 @@ const Sort = () => {
                                 </li>
                             ))
                         }
-                        {/* <li onClick={() => onClickSort('популярности')}>популярности</li>
-                        <li onClick={() => setSortedBy('цене')}>цене</li>
-                        <li onClick={() => setSortedBy('алфавиту')}>алфавиту</li> */}
                     </ul>
                 </div>
             }

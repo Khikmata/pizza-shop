@@ -29,11 +29,14 @@ const Home = () => {
     const categoryIndex = useSelector((state) => state.filterSlice.categoryIndex);
     const categoryFilter = categoryIndex > 0 ? `category=${categoryIndex}` : ''
 
+
+    //Для передачи компоненту категорий
+
     const onClickCategory = (index) => {
         dispatch(setCategoryIndex(index))
     }
 
-    //Получение пицц с бекенда при рендере и обновление при изменении фильров
+    //Получение пицц с бекенда при рендере и обновлении компонентов
     useEffect(() => {
         const fetchPizzas = async () => {
             dispatch(getPizzas({ categoryFilter, sortType, sortOrder, searchValue }))
@@ -79,20 +82,22 @@ const Home = () => {
                     </div>
                     <h2 className="content__title">Все пиццы</h2>
                     {
+                        //При ошибке => сообщение об ошибке
                         status === 'error'
                             ?
                             <div className='content__error'>
-                                <h2>Произошла ошибка при загрузке пицц :( </h2>
+                                <h2>Произошла ошибка при загрузке пицц :{'('} </h2>
                                 <p>
                                     Попробуйте повторить попытку позже
                                 </p>
                             </div>
                             :
+                            //При фулфиллед запросе => контент
                             <div className="content__items">
                                 {status === 'loading'
                                     ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
                                     : items.map((item, index) => (<PizzaBlock key={index} {...item} />))
-                                })
+                                }
                             </div>
                     }
                 </div>

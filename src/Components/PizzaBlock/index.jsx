@@ -4,11 +4,14 @@ import { addToCart } from '../../redux/reducers/cartSlice';
 
 export const PizzaBlock = (props) => {
 
+    //вытаскивание пропсов
     const id = props.id;
     const title = props.title;
     const price = props.price;
     const imageUrl = props.imageUrl;
 
+
+    //определяем типы
     const doughType = [
         'тонкое',
         'традиционное'
@@ -52,6 +55,9 @@ export const PizzaBlock = (props) => {
             type: doughType[activeType],
             size: pizzaSizes[activeSize],
         }
+
+
+        console.log(item)
         dispatch(addToCart(item))
         setAddItem(addItem + 1)
     }
