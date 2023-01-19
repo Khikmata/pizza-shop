@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../img/pizza-logo.svg'
+import { ICartItem } from '../redux/reducers/cartSlice';
 import { RootState } from '../redux/store';
 
 import Search from './search/Search';
@@ -12,7 +13,7 @@ const Header = () => {
 
 const { items, cartPriceTotal } = useSelector((state:RootState) => state.cartSlice)
 const location = useLocation();
-const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
+const totalCount = items.reduce((sum: number, item: ICartItem) => sum + item.count, 0)
 
 return (
     <div className="header">
@@ -23,7 +24,7 @@ return (
                         <img width="38" src={logo} alt="Pizza logo" />
                         <div>
                             <h1>React Pizza</h1>
-                            <p>Хикмата делает пиццу</p>
+                            <p></p>
                         </div>
                     </div>
                 </Link>

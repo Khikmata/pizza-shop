@@ -9,23 +9,26 @@ import { Skeleton } from '../Components/PizzaBlock/Skeleton'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setCategoryIndex, } from '../redux/reducers/filterSlice';
-import { getPizzas } from '../redux/reducers/fetchItemSlice';
+import { getPizzas, IFetchPizza } from '../redux/reducers/fetchItemSlice';
+import { RootState, useAppDispatch } from '../redux/store';
+import { ICartItem } from '../redux/reducers/cartSlice';
 
 
 
 const Home:React.FC = () => {
 
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     //Переменные для пиццы и статуса отправки( Loading || Fulfilled || Error)
-    const { items, status } = useSelector((state: any) => state.fetchItemSlice)
+    const { items, status } = useSelector((state: RootState) => state.fetchItemSlice)
 
     //Фильтры для поиска
-    const searchValue = useSelector((state: any) => state.searchSlice.searchValue)
-    const sortType = useSelector((state: any) => state.filterSlice.sort.sortValue);
-    const sortOrder = useSelector((state: any) => state.filterSlice.sort.orderBy)
-    const categoryIndex = useSelector((state: any) => state.filterSlice.categoryIndex);
+    const searchValue = useSelector((state: RootState) => state.searchSlice.searchValue)
+    
+    const sortType = useSelector((state: RootState) => state.filterSlice.sort.sortValue);
+    const sortOrder = useSelector((state: RootState) => state.filterSlice.sort.orderBy)
+    const categoryIndex = useSelector((state: RootState) => state.filterSlice.categoryIndex);
     const categoryFilter = categoryIndex > 0 ? `category=${categoryIndex}` : ''
 
 
@@ -38,7 +41,6 @@ const Home:React.FC = () => {
     //Получение пицц с бекенда при рендере и обновлении компонентов
     useEffect(() => {
         const fetchPizzas = async () => {
-            // @ts-ignore
             dispatch(getPizzas({ categoryFilter, sortType, sortOrder, searchValue }))
         }
         fetchPizzas();
@@ -69,7 +71,7 @@ const Home:React.FC = () => {
                             <div className="content__items">
                                 {status === 'loading'
                                     ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-                                    : items.map((item:any, index:number) => (<PizzaBlock key={index} {...item} />))
+                                    : items.map((item, index:number) => (<PizzaBlock key={index} {...item} />))
                                 }
                             </div>
                     }

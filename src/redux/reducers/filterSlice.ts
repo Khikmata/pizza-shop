@@ -1,5 +1,5 @@
 import { RootState } from './../store';
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 export interface ISort{
@@ -31,23 +31,22 @@ export const filterSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
-        setCategoryIndex: (state, action) => {
+        setCategoryIndex: (state, action: PayloadAction<number>) => {
             state.categoryIndex = action.payload;
         },
-        setSortType: (state, action) => {
+        setSortType: (state, action: PayloadAction<ISort>) => {
             state.sort = action.payload;
         },
         toggleOrderBy: (state) => {
             state.sort.orderBy = !state.sort.orderBy;
         },
-        setFilters: (state, action) => {
+        setFilters: (state, action: PayloadAction<IFilterInitState>) => {
             state.sort = action.payload.sort;
-            state.categoryIndex = Number(action.payload.categoryIndex);
+            state.categoryIndex = action.payload.categoryIndex;
         }
     }
 });
 
-export const sortSelector = (state:RootState) => state.filterSlice.sort
 
 
 export const { setCategoryIndex, setSortType, toggleOrderBy, setFilters } = filterSlice.actions;

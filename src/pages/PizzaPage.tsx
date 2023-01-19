@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { IPizza } from '../models/IPizza';
+
 
 const PizzaPage: React.FC = () => {
 
-    const [pizza, setPizza] = useState<IPizza>({title:'', description: '', imageUrl: '', price: 0});
+    const [pizza, setPizza] = useState({title:'', description: '', imageUrl: '', price: 0});
     const [isItPizza, setIsItPizza] = useState(true)
 
 

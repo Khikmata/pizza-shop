@@ -1,4 +1,3 @@
-import { IPizza } from './../../models/IPizza';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 

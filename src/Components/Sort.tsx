@@ -2,7 +2,8 @@ import { type } from '@testing-library/user-event/dist/type';
 import React, { useEffect, useRef, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { ISort, setSortType, sortSelector, toggleOrderBy, } from '../redux/reducers/filterSlice';
+import { ISort, setSortType, toggleOrderBy, } from '../redux/reducers/filterSlice';
+import { RootState } from '../redux/store';
 
 
 
@@ -16,7 +17,7 @@ const Sort = () => {
 
     const dispatch = useDispatch();
 
-    const sort = useSelector(sortSelector);
+    const sort = useSelector((state: RootState) => state.filterSlice.sort);
 
     //Видимость модульного окна
     const [visible, setVisible] = useState(false);

@@ -1,28 +1,21 @@
 import React, { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { IPizza } from '../../models/IPizza';
+
 import { addToCart, ICartItem } from '../../redux/reducers/cartSlice';
+import { IPizza } from '../../redux/reducers/fetchItemSlice';
+import { RootState } from '../../redux/store';
 
 
-interface IPizzaBlock {
-    id: number;
-    title: string;
-    price: number;
-    imageUrl: string;
-    sizes: number[];
-    types: number[];
-    rating: number;
-}
-
-export const PizzaBlock:FC<IPizzaBlock> = (props) => {
+export const PizzaBlock:FC<IPizza> = (props) => {
 
     //вытаскивание  пропсов
     const id = props.id;
     const title = props.title;
     const price = props.price;
     const imageUrl = props.imageUrl;
-
+const types = props.types;
+const sizes = props.sizes;
 
     //определяем тип теста
     const doughType = [
@@ -37,10 +30,10 @@ export const PizzaBlock:FC<IPizzaBlock> = (props) => {
     ]
 
 
-    const [activeType, setActiveType] = useState(0);
+    const [activeType, setActiveType] = useState(types[0]);
     const [activeSize, setActiveSize] = useState(0);
 
-    const cartItem = useSelector((state:any) =>
+    const cartItem = useSelector((state:RootState) =>
         state.cartSlice.items.find(
             (obj: ICartItem) =>
                 obj.id === id &&
@@ -89,14 +82,14 @@ export const PizzaBlock:FC<IPizzaBlock> = (props) => {
                 <div className="pizza-block__selector">
                     <ul>
                         {
-                            props.types.map((typeIndex) => (
+                            types.map((typeIndex) => (
                                 <li key={typeIndex} onClick={() => setActiveType(typeIndex)} className={activeType === typeIndex ? 'active' : ''}>{doughType[typeIndex]}</li>
                             ))
                         }
                     </ul>
                     <ul>
                         {
-                            props.sizes.map((size, i) => (
+                            sizes.map((size, i) => (
                                 <li key={i} onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>{size} см.</li>
                             ))
                         }

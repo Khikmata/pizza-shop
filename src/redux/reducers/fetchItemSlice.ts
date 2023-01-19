@@ -1,53 +1,73 @@
-import { IPizza } from './../../models/IPizza';
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
 
 
+export interface IPizza {
+    id: number;
+    title: string;
+    price: number;
+    imageUrl: string;
+    sizes: number[];
+    types: number[];
+    rating: number;
+    description: string;
+}
 
-export const getPizzas = createAsyncThunk(
+export interface IFetchPizza{
+    categoryFilter: string;
+    sortType: string;
+    sortOrder: boolean | undefined;
+    searchValue: string;
+}
+
+
+export const getPizzas = createAsyncThunk<IPizza[], IFetchPizza>(
     'getPizza/pizzaFetchStatus',
-    async (params, thunkAPI) => {
-        const { categoryFilter, sortType, sortOrder, searchValue }: any = params;
-        const response = await axios.get(`https://63bb40aa32d17a50908b3902.mockapi.io/items?${categoryFilter}&sortBy=${sortType}&order=${sortOrder ? 'asc' : 'desc'}&search=${searchValue}`)
-
-        console.log(thunkAPI)
-        return response.data;
+    async (params) => {
+        const { categoryFilter, sortType, sortOrder, searchValue } = params;
+        const {data} = await axios.get<IPizza[]>(`https://63bb40aa32d17a50908b3902.mockapi.io/items?${categoryFilter}&sortBy=${sortType}&order=${sortOrder ? 'asc' : 'desc'}&search=${searchValue}`)
+        return data;
     }
 )
-
+export    enum Status {
+    LOADING = 'loading',
+    FULLFILLED = 'fulfilled',
+    ERROR = 'error',
+}
 
 
 interface IFetchItemsInitState {
     items: IPizza[];
-    status: 'loading' | 'fulfilled' | 'error'
+    status: Status;
 }
 
 const initialState:IFetchItemsInitState = {
     items: [],
-    status: 'loading', // loading || fulfilled || error
+    status: Status.LOADING, // loading || fulfilled || error
 }
 
 
 export const fetchItemSlice = createSlice({
-    name: 'pizzaFetch',
+    name: 'pizzaFetchStatus',
     initialState,
     reducers: {
-        setItems: (state, action) => {
+        setItems: (state, action:PayloadAction<IPizza[]>) => {
             state.items = action.payload;
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(getPizzas.pending, (state) => {
-                state.status = 'loading';
+                state.status = Status.LOADING;
                 state.items = [];
             })
             .addCase(getPizzas.fulfilled, (state, action) => {
+                state.status = Status.FULLFILLED;
                 state.items = action.payload;
-                state.status = 'fulfilled';
             })
             .addCase(getPizzas.rejected, (state) => {
-                state.status = 'error'
+                state.status = Status.ERROR;
                 state.items = [];
             })
     }
