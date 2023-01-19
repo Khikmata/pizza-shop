@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+interface IThemeInitState{
+    isNightMode: boolean;
+}
+const item = localStorage.getItem('isNightMode');
+export const storedNightMode = item ? JSON.parse(item) : false;
 
-    isNightMode: JSON.parse(localStorage.getItem('isNightMode')) || false,
+const initialState:IThemeInitState = {
+
+    isNightMode: storedNightMode,
 }
 
 export const themeSlice = createSlice({

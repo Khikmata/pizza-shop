@@ -1,6 +1,22 @@
+import { RootState } from './../store';
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+
+export interface ISort{
+    name: string;
+    sortValue: 'rating' | 'title' | 'price';
+    orderBy?: boolean;
+}
+
+
+interface IFilterInitState{
+    categoryIndex: number;
+    sort: ISort; 
+}
+
+
+
+const initialState: IFilterInitState = {
     //Значение - Для сортировки категорий
     categoryIndex: 0,
     //Значение - Для сортировки по цене/популярности/алфавиту
@@ -31,7 +47,7 @@ export const filterSlice = createSlice({
     }
 });
 
-export const sortSelector = (state) => state.filterSlice
+export const sortSelector = (state:RootState) => state.filterSlice.sort
 
 
 export const { setCategoryIndex, setSortType, toggleOrderBy, setFilters } = filterSlice.actions;

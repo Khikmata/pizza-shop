@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+
+interface ISearchInitState{
+    searchValue: string;
+}
+
+
+const initialState:ISearchInitState = {
     searchValue: '',
 }
 

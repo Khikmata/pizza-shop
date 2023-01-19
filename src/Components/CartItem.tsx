@@ -1,38 +1,29 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { addItem, addToCart, removeFromCart, removeItem } from '../redux/reducers/cartSlice';
+import { addItem, addToCart, ICartItem, removeFromCart, removeItem } from '../redux/reducers/cartSlice';
 
 
-interface ICartItem{
-  id: number;
-  title: string;
-  type: string;
-  size: number;
-  price: number;
-  imageUrl: string;
-  count: number
-}
 
 const CartItem:React.FC<ICartItem> = ({ id, title, type, size, price, imageUrl, count }) => {
 
   const dispatch = useDispatch();
   const onClickPlus = () => {
-    dispatch(addItem({ id, size, type, price }))
+    dispatch(addItem({title, imageUrl, count, id, size, type, price }))
   }
   const onClickMinus = () => {
 
-    dispatch(removeItem({ id, size, type, price }))
+    dispatch(removeItem({title, imageUrl, count, id, size, type, price }))
 
     //console.log(dispatch(removeItem({ id, size, type })))
     //Удаление объекта, если их счетчик достигает 0
     if (count <= 1) {
-      dispatch(removeFromCart({ id, size, type, count, price }))
+      dispatch(removeFromCart({title, imageUrl, count, id, size, type, price }))
       console.log('item udalen')
     }
   }
   const onClickRemove = () => {
     if (window.confirm('Удалить товар из списка?')) {
-      dispatch(removeFromCart({ id, size, type, price, count }))
+      dispatch(removeFromCart({title, imageUrl, count, id, size, type, price }))
     }
   }
 

@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addToCart } from '../../redux/reducers/cartSlice';
+import { IPizza } from '../../models/IPizza';
+import { addToCart, ICartItem } from '../../redux/reducers/cartSlice';
 
 
 interface IPizzaBlock {
@@ -12,13 +13,6 @@ interface IPizzaBlock {
     sizes: number[];
     types: number[];
     rating: number;
-
-}
-
-interface ICartItem {
-id: number;
-    type: string;
-    size: string;
 }
 
 export const PizzaBlock:FC<IPizzaBlock> = (props) => {
@@ -65,13 +59,14 @@ export const PizzaBlock:FC<IPizzaBlock> = (props) => {
 
 
     const buyPizza = () => {
-        const item = {
+        const item: ICartItem = {
             id,
             title,
             price,
             imageUrl,
             type: doughType[activeType],
             size: pizzaSizes[activeSize],
+            count,
         }
 
         dispatch(addToCart(item))

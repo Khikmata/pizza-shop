@@ -3,7 +3,7 @@
 @import './libs/normalize.scss';
 @import './components/all.scss';
 
-
+$background: #e8c7bf;
 
 body {
   background-color: #e8c7bf;
@@ -18,13 +18,7 @@ body {
   align-items: center;
   flex-direction: column;
   height: 80vh;
-  background-color: $background;
-  &.dark{
-    background-color: #2b2b2b;
-    h1{
-      color: #b6b6b6;
-    }
-  }
+  background-color: transparent;
   &__button{
     margin-top: 20px;
   
@@ -58,6 +52,14 @@ body {
 
 .dark-theme {
   background-color: #202020;
+
+  $background: #202020;
+
+.notFound{
+  h1{
+    color: #b6b6b6;
+  }
+}
 
   .Search_deleteValue__cYU8q{
     cursor: pointer;

@@ -1,12 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { IPizza } from './../../models/IPizza';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-const initialState = {
+
+
+
+export interface ICartItem{
+    id: number;
+    title: string;
+    price: number;
+    imageUrl: string;
+    type: string;
+    size: string;
+    count: number;
+}
+
+interface ICartInitState {
+    cartPriceTotal: number;
+    items: ICartItem[];
+    totalCount: number;
+}
+
+const initialState:ICartInitState = {
     cartPriceTotal: 0,
     items: [],
     totalCount: 0,
 }
-
-
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -14,8 +32,7 @@ export const cartSlice = createSlice({
     reducers: {
 
         //Добавить пиццу с главной
-        addToCart: (state, action) => {
-
+        addToCart: (state, action: PayloadAction<ICartItem>) => {
 
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
 
@@ -26,7 +43,7 @@ export const cartSlice = createSlice({
             }, 0)
         },
         // Удалить пиццу с корзины
-        removeFromCart: (state, action) => {
+        removeFromCart: (state, action: PayloadAction<ICartItem>) => {
 
 
             // state.items = state.items.filter(obj => obj.count < 1 || obj.id !== action.payload.id &&  obj.size !== action.payload.size)
@@ -36,7 +53,9 @@ export const cartSlice = createSlice({
                     (obj.size === action.payload.size) &&
                     (obj.type === action.payload.type))
             });
-            state.cartPriceTotal -= findItem.price * findItem.count;
+            if (findItem){
+                state.cartPriceTotal -= findItem.price * findItem.count;
+            }
             state.items = state.items.filter(obj => {
                 return ((obj.id !== action.payload.id) ||
                     (obj.size !== action.payload.size) ||
@@ -50,22 +69,23 @@ export const cartSlice = createSlice({
             state.cartPriceTotal = 0
         },
         // +1 к счетчику на страничке корзины
-        addItem: (state, action) => {
+        addItem: (state, action: PayloadAction<ICartItem>) => {
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
             findItem && findItem.count++;
+            if (findItem){
             state.cartPriceTotal += findItem.price;
+            }
         },
         // -1 к счетчику на страничке корзины
-        removeItem: (state, action) => {
+        removeItem: (state, action: PayloadAction<ICartItem>) => {
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
             findItem && findItem.count--;
+            if (findItem){
             state.cartPriceTotal -= findItem.price;
+            }
         },
     }
 });
-
-
-export const cartSelector = (state) => state.cartSlice;
 
 export const { addToCart, removeFromCart, clearCart, addItem, removeItem } = cartSlice.actions;
 

@@ -38,6 +38,11 @@ justify-content: flex-start;
   align-items: center;
   justify-content: flex-end;
 
+  &.NF__DARK{
+    margin-top: 20px;
+    justify-content: center;
+  }
+
   width: 100%;
   @media (max-width: 600px)
     {

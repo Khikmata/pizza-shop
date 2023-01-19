@@ -1,14 +1,8 @@
 import React, { useState } from 'react'
 
-
-
-
-
-
-
 interface ICategories{
 activeIndex: number;
-onClickCategory: any;
+onClickCategory: (index:number) => void;
 }
 
 const Categories: React.FC<ICategories> = ({ activeIndex, onClickCategory }) => {
@@ -23,6 +17,8 @@ const Categories: React.FC<ICategories> = ({ activeIndex, onClickCategory }) => 
             'Острые',
             'Закрытые'
         ];
+
+//onclickcategory = dispatch(setCategoryIndex(index))
 
     return (
         <div className="categories">

@@ -13,61 +13,36 @@ import { getPizzas } from '../redux/reducers/fetchItemSlice';
 
 
 
-const Home = () => {
+const Home:React.FC = () => {
 
 
     const dispatch = useDispatch();
 
     //Переменные для пиццы и статуса отправки( Loading || Fulfilled || Error)
-    const { items, status } = useSelector((state) => state.fetchItemSlice)
+    const { items, status } = useSelector((state: any) => state.fetchItemSlice)
 
     //Фильтры для поиска
-    const searchValue = useSelector((state) => state.searchSlice.searchValue)
-    const sortType = useSelector((state) => state.filterSlice.sort.sortValue);
-    const sortOrder = useSelector((state) => state.filterSlice.sort.orderBy)
-    const categoryIndex = useSelector((state) => state.filterSlice.categoryIndex);
+    const searchValue = useSelector((state: any) => state.searchSlice.searchValue)
+    const sortType = useSelector((state: any) => state.filterSlice.sort.sortValue);
+    const sortOrder = useSelector((state: any) => state.filterSlice.sort.orderBy)
+    const categoryIndex = useSelector((state: any) => state.filterSlice.categoryIndex);
     const categoryFilter = categoryIndex > 0 ? `category=${categoryIndex}` : ''
 
 
     //Для передачи компоненту категорий
 
-    const onClickCategory = (index) => {
+    const onClickCategory = (index: number) => {
         dispatch(setCategoryIndex(index))
     }
 
     //Получение пицц с бекенда при рендере и обновлении компонентов
     useEffect(() => {
         const fetchPizzas = async () => {
+            // @ts-ignore
             dispatch(getPizzas({ categoryFilter, sortType, sortOrder, searchValue }))
         }
         fetchPizzas();
     }, [categoryIndex, sortType, searchValue, sortOrder, categoryFilter]);
-
-    //потом вернусь
-    // Прирастание фильтров к ссылке
-    // useEffect(() => {
-    //     const queryString = QueryString.stringify({
-    //         sortValue: sortType,
-    //         categoryIndex,
-    //     });
-
-    //     navigate(`?${queryString}`)
-
-    // }, [categoryIndex, sortType, searchValue, sortOrder])
-
-
-    // useEffect(() => {
-    //     if (window.location.search) {
-    //         const params = QueryString.parse(window.location.search.substring(1))
-
-    //         const sort = sortStates.find(obj => obj.sortValue === params.sortValue)
-    //         console.log(params)
-    //         dispatch(setFilters({
-    //             ...params, sort
-    //         }))
-    //     }
-    // }, [])
-
 
     //Верстка
     return (
@@ -84,7 +59,7 @@ const Home = () => {
                         status === 'error'
                             ?
                             <div className='content__error'>
-                                <h2>Произошла ошибка при загрузке пицц :{'('} </h2>
+                                <h2>Произошла ошибка при загрузке пицц {':('} </h2>
                                 <p>
                                     Попробуйте повторить попытку позже
                                 </p>
@@ -94,7 +69,7 @@ const Home = () => {
                             <div className="content__items">
                                 {status === 'loading'
                                     ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-                                    : items.map((item, index) => (<PizzaBlock key={index} {...item} />))
+                                    : items.map((item:any, index:number) => (<PizzaBlock key={index} {...item} />))
                                 }
                             </div>
                     }
