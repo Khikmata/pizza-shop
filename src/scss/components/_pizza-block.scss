@@ -25,6 +25,10 @@
       width: 150px;
       height: 150px;
     }
+    transition: all 0.2s ease-in-out;
+    &:hover{
+      scale: 90%;
+  }
   }
 
   &__title {

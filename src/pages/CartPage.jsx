@@ -26,7 +26,6 @@ const CartPage = () => {
 
     return (
         <div className="wrapper" >
-            <Header />
             {
                 (items.length !== 0 ? <div className="container container--cart">
                     <div className="cart" >

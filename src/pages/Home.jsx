@@ -73,7 +73,6 @@ const Home = () => {
     //Верстка
     return (
         <>
-            <Header />
             <div className="content">
                 <div className="container">
                     <div className="content__top">
