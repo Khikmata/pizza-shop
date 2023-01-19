@@ -1,7 +1,17 @@
 import React, { useState } from 'react'
 
-const Categories = ({ activeIndex, onClickCategory }) => {
 
+
+
+
+
+
+interface ICategories{
+activeIndex: number;
+onClickCategory: any;
+}
+
+const Categories: React.FC<ICategories> = ({ activeIndex, onClickCategory }) => {
 
     //Список всех категорий
     const categories =

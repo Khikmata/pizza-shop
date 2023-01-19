@@ -1,22 +1,41 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../../redux/reducers/cartSlice';
 
-export const PizzaBlock = (props) => {
 
-    //вытаскивание пропсов
+interface IPizzaBlock {
+    id: number;
+    title: string;
+    price: number;
+    imageUrl: string;
+    sizes: number[];
+    types: number[];
+    rating: number;
+
+}
+
+interface ICartItem {
+id: number;
+    type: string;
+    size: string;
+}
+
+export const PizzaBlock:FC<IPizzaBlock> = (props) => {
+
+    //вытаскивание  пропсов
     const id = props.id;
     const title = props.title;
     const price = props.price;
     const imageUrl = props.imageUrl;
 
 
-    //определяем типы
+    //определяем тип теста
     const doughType = [
         'тонкое',
         'традиционное'
     ]
+    //Определяем размер пиццы
     const pizzaSizes = [
         '26',
         '30',
@@ -27,9 +46,9 @@ export const PizzaBlock = (props) => {
     const [activeType, setActiveType] = useState(0);
     const [activeSize, setActiveSize] = useState(0);
 
-    const cartItem = useSelector((state) =>
+    const cartItem = useSelector((state:any) =>
         state.cartSlice.items.find(
-            (obj) =>
+            (obj: ICartItem) =>
                 obj.id === id &&
                 obj.type === doughType[activeType] &&
                 obj.size === pizzaSizes[activeSize]
@@ -46,8 +65,6 @@ export const PizzaBlock = (props) => {
 
 
     const buyPizza = () => {
-
-
         const item = {
             id,
             title,
@@ -57,8 +74,6 @@ export const PizzaBlock = (props) => {
             size: pizzaSizes[activeSize],
         }
 
-
-        console.log(item)
         dispatch(addToCart(item))
         setAddItem(addItem + 1)
     }
@@ -67,7 +82,7 @@ export const PizzaBlock = (props) => {
 
     return (
         <div className='pizza-block-wrapper'>
-            <div to={`/pizza/${id}`} className="pizza-block">
+            <div className="pizza-block">
                 <Link to={`/pizza/${id}`}>
                     <img
                         className="pizza-block__image"

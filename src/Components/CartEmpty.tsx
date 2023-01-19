@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+
 import emptyCartImg from '../img/empty-cart.png'
 
-
-const CartEmpty = () => {
+const CartEmpty: React.FC = () => {
   return (
     <div className="wrapper">
       <div className="content">
@@ -13,9 +14,9 @@ const CartEmpty = () => {
               Похоже, вы еще ничего не добавили в нее
             </p>
             <img src={emptyCartImg} alt="Empty cart" />
-            <a href="/" className="button button--black">
+            <Link to={'/'} className="button button--black">
               <span>Вернуться назад</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ const Search = () => {
 
 
     const [value, setValue] = useState('')
-    const inputRef = useRef();
+    const inputRef = useRef<HTMLInputElement>(null);
 
 
     const debounce = useDebounce(() => {
@@ -20,9 +20,9 @@ const Search = () => {
     }, 300);
 
     const onClickClear = () => {
-        dispatch(setSearchValue(''))
-        setValue('')
-        inputRef.current.focus();
+        dispatch(setSearchValue(''));
+        setValue('');
+        inputRef.current?.focus();
     }
 
     useEffect(() => {

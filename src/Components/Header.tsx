@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../img/pizza-logo.svg'
-
+import { cartSelector } from '../redux/reducers/cartSlice';
 
 import Search from './search/Search';
 import DarkTheme from './theme/DarkTheme';
@@ -10,14 +10,11 @@ import DarkTheme from './theme/DarkTheme';
 const Header = () => {
 
 
-    const { items, cartPriceTotal } = useSelector(state => state.cartSlice)
+    const { items, cartPriceTotal } = useSelector(cartSelector)
     const location = useLocation();
 
 
-    console.log(location)
-
-
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
     return (
         <div className="header">

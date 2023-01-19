@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSortType, toggleOrderBy, } from '../redux/reducers/filterSlice';
+import { setSortType, sortSelector, toggleOrderBy, } from '../redux/reducers/filterSlice';
 
+interface ISortStates{
+    name: string;
+    sortValue: string;
+}
 
-export const sortStates = [
+export const sortStates:ISortStates[] = [
     { name: 'популярности', sortValue: 'rating' },
     { name: 'цене', sortValue: 'price' },
     { name: 'алфавиту', sortValue: 'title' },
@@ -14,26 +18,26 @@ const Sort = () => {
 
     const dispatch = useDispatch();
 
-    const sort = useSelector(state => state.filterSlice.sort);
+    const sort = useSelector(sortSelector);
 
     //Видимость модульного окна
     const [visible, setVisible] = useState(false);
 
     //Ссылка для модульного окна
-    const sortRef = useRef()
+    const sortRef = useRef<HTMLDivElement>(null)
 
 
     const toggleOrder = () => {
         dispatch(toggleOrderBy())
     }
 
-    const toggleSortItems = (i) => {
+    const toggleSortItems = (i: ISortStates) => {
         dispatch(setSortType(i))
         setVisible(false)
     }
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             if (!event.composedPath().includes(sortRef.current)) {
                 setVisible(false)
             }

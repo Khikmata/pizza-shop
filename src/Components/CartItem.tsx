@@ -3,7 +3,17 @@ import { useDispatch } from 'react-redux';
 import { addItem, addToCart, removeFromCart, removeItem } from '../redux/reducers/cartSlice';
 
 
-const CartItem = ({ id, title, type, size, price, imageUrl, count }) => {
+interface ICartItem{
+  id: number;
+  title: string;
+  type: string;
+  size: number;
+  price: number;
+  imageUrl: string;
+  count: number
+}
+
+const CartItem:React.FC<ICartItem> = ({ id, title, type, size, price, imageUrl, count }) => {
 
   const dispatch = useDispatch();
   const onClickPlus = () => {

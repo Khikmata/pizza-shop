@@ -3,9 +3,8 @@ import React from 'react'
 import { useEffect } from 'react';
 import Categories from '../Components/Categories'
 import Sort from '../Components/Sort'
-import PizzaBlock from '../Components/PizzaBlock/'
+import PizzaBlock from '../Components/PizzaBlock'
 import { Skeleton } from '../Components/PizzaBlock/Skeleton'
-import Header from '../Components/Header';
 
 
 import { useDispatch, useSelector } from 'react-redux';
