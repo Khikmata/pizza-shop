@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import themeSlice, { setIsNightMode } from '../../redux/reducers/themeSlice';
+import { useEffect, } from 'react'
+
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { setIsNightMode } from '../../redux/reducers/theme/themeSlice';
 import { useAppDispatch } from '../../redux/store';
-import styles from './DarkTheme.scss'
 
 const DarkTheme = () => {
 
     const dispatch = useAppDispatch();
-    const isNightMode = useSelector(state => state.themeSlice.isNightMode)
+    const isNightMode = useTypedSelector(state => state.themeSlice.isNightMode)
 
 
     useEffect(() => {
-        let theme = localStorage.getItem("theme")
-        if (theme === "dark") {
-            setIsNightMode(true);
+
+        if (isNightMode === true) {
             document.body.classList.add("dark-theme");
         } else {
-            setIsNightMode(false);
             document.body.classList.remove("dark-theme");
         }
     }, []);
@@ -43,4 +41,4 @@ const DarkTheme = () => {
     );
 }
 
-export default DarkTheme
+export default DarkTheme;

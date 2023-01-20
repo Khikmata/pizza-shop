@@ -1,12 +1,8 @@
+import { ISearchInitState } from './types';
 import { createSlice } from "@reduxjs/toolkit"
 
 
-interface ISearchInitState{
-    searchValue: string;
-}
-
-
-const initialState:ISearchInitState = {
+const initialState: ISearchInitState = {
     searchValue: '',
 }
 

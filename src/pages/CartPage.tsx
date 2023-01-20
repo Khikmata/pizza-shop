@@ -1,21 +1,22 @@
 import React from 'react'
 import CartItem from '../Components/CartItem';
-import Header from '../Components/Header';
 
-import { useSelector } from 'react-redux';
-import { clearCart, ICartItem } from '../redux/reducers/cartSlice';
+
+import { clearCart } from '../redux/reducers/cart/cartSlice';
 import CartEmpty from '../Components/CartEmpty';
 import { Link } from 'react-router-dom';
 
-import { RootState, useAppDispatch } from '../redux/store';
+import { useAppDispatch } from '../redux/store';
+import { ICartItem } from '../redux/reducers/cart/types';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
-const CartPage:React.FC = () => {
+const CartPage: React.FC = () => {
 
 
     const dispatch = useAppDispatch()
 
     //Счетчик пицц и общей стоимости
-    const { items, cartPriceTotal } = useSelector((state: RootState) => state.cartSlice)
+    const { items, cartPriceTotal } = useTypedSelector((state) => state.cartSlice)
 
     //Очистка карзины
     const onClickClear = () => {
@@ -24,7 +25,7 @@ const CartPage:React.FC = () => {
         }
     }
     //Получаем общее кол-во пицц в корзине
-    const totalCount = items.reduce((sum:number, item: ICartItem ) => sum + item.count, 0)
+    const totalCount = items.reduce((sum: number, item: ICartItem) => sum + item.count, 0)
 
     return (
         <div className="wrapper" >

@@ -53,7 +53,15 @@ body {
 .dark-theme {
   background-color: #202020;
 
+  
   $background: #202020;
+
+.DarkTheme{
+  path{
+    fill: #e2e2e2;
+  }
+}
+
   .disabled {
     &:active{
       transform: none;
@@ -423,7 +431,7 @@ fill:#b6b6b6
   }
 
   &__item {
-    transition: all 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
     &:hover{
       scale: 103%;
     }
@@ -790,3 +798,23 @@ h2{
   padding-bottom: 40px;
 }
 
+.DarkTheme{
+
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    path{
+      fill: $orange;
+    }
+  }
+  svg
+  {
+    transition: all 0.3s ease-in-out;
+    path 
+    {
+      fill: #2b2b2b;
+    }
+  }
+}

@@ -5,28 +5,29 @@ import Categories from '../Components/Categories'
 import Sort from '../Components/Sort'
 import PizzaBlock from '../Components/PizzaBlock'
 import { Skeleton } from '../Components/PizzaBlock/Skeleton'
-import { useSelector } from 'react-redux';
-import { setCategoryIndex, } from '../redux/reducers/filterSlice';
-import { getPizzas } from '../redux/reducers/fetchItemSlice';
-import { RootState, useAppDispatch } from '../redux/store';
+
+import { setCategoryIndex, } from '../redux/reducers/filter/filterSlice';
+import { getPizzas } from '../redux/reducers/fetchItems/fetchItemSlice';
+import { useAppDispatch } from '../redux/store';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 
 
 
-const Home:React.FC = () => {
+const Home: React.FC = () => {
 
 
     const dispatch = useAppDispatch();
 
     //Переменные для пиццы и статуса отправки( Loading || Fulfilled || Error)
-    const { items, status } = useSelector((state: RootState) => state.fetchItemSlice)
+    const { items, status } = useTypedSelector((state) => state.fetchItemSlice)
 
     //Фильтры для поиска
-    const searchValue = useSelector((state: RootState) => state.searchSlice.searchValue)
+    const searchValue = useTypedSelector((state) => state.searchSlice.searchValue)
 
-    const sortType = useSelector((state: RootState) => state.filterSlice.sort.sortValue);
-    const sortOrder = useSelector((state: RootState) => state.filterSlice.sort.orderBy)
-    const categoryIndex = useSelector((state: RootState) => state.filterSlice.categoryIndex);
+    const sortType = useTypedSelector((state) => state.filterSlice.sort.sortValue);
+    const sortOrder = useTypedSelector((state) => state.filterSlice.sort.orderBy)
+    const categoryIndex = useTypedSelector((state) => state.filterSlice.categoryIndex);
     const categoryFilter = categoryIndex > 0 ? `category=${categoryIndex}` : ''
 
 
@@ -71,18 +72,18 @@ const Home:React.FC = () => {
                             <div className="content__items">
                                 {status === 'loading'
                                     ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-                                    : items.map((item, index:number) => (<PizzaBlock key={index} {...item} />))                      
+                                    : items.map((item, index: number) => (<PizzaBlock key={index} {...item} />))
                                 }
-                            </div> 
+                            </div>
                     }
                     {
-                    (items.length === 0 && status !== 'loading' &&                         
-                    <div> 
-                        <h2 className={'items_notFound'}>
-                        К сожалению, по таким настройкам ничего не найдено 
-                        </h2> 
-                    </div>)
-                    }                   
+                        (items.length === 0 && status !== 'loading' &&
+                            <div>
+                                <h2 className={'items_notFound'}>
+                                    К сожалению, по таким настройкам ничего не найдено
+                                </h2>
+                            </div>)
+                    }
                 </div>
             </div>
         </>

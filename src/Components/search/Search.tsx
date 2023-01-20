@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDebounce } from '../../hooks/useThrottle'
-import { setSearchValue } from '../../redux/reducers/searchSlice'
+import { useDebounce } from '../../hooks/useDebounce'
+import { setSearchValue } from '../../redux/reducers/search/searchSlice'
 import { useAppDispatch } from '../../redux/store'
 import styles from './Search.module.scss'
 
 
 
-const Search:React.FC = () => {
+
+const Search: React.FC = () => {
 
     const dispatch = useAppDispatch();
 

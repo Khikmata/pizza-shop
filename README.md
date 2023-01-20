@@ -10,10 +10,11 @@
 - React Router v6
 - Axios
 - React Hooks (хуки)
-- Prettier
+- Redux-persist
 - CSS-Modules / SCSS
 - React Content Loader
 - Code Splitting
+
 
 📝 Функционал:
 

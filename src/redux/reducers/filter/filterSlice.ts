@@ -1,18 +1,7 @@
-import { RootState } from './../store';
+import { IFilterInitState, ISort } from './types';
+import { RootState } from '../../store';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-
-export interface ISort{
-    name: string;
-    sortValue: 'rating' | 'title' | 'price';
-    orderBy: boolean;
-}
-
-
-interface IFilterInitState{
-    categoryIndex: number;
-    sort: ISort; 
-}
 
 
 

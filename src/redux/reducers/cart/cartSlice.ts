@@ -1,26 +1,11 @@
+import { ICartInitState, ICartItem } from './types';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 
 
-export interface ICartItem{
-    id: number;
-    title: string;
-    price: number;
-    imageUrl: string;
-    type: string;
-    size: string;
-    count: number;
-    totalPrice: number;
-}
 
-interface ICartInitState {
-    cartPriceTotal: number;
-    items: ICartItem[];
-    totalCount: number;
-}
-
-const initialState:ICartInitState = {
+const initialState: ICartInitState = {
     cartPriceTotal: 0,
     items: [],
     totalCount: 0,
@@ -36,7 +21,7 @@ export const cartSlice = createSlice({
 
         //Добавить пиццу с главной
         addToCart: (state, action: PayloadAction<ICartItem>) => {
-   
+
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
 
             (findItem) ? findItem.count++ : state.items.push({ ...action.payload, count: 1 })
@@ -56,7 +41,7 @@ export const cartSlice = createSlice({
                     (obj.size === action.payload.size) &&
                     (obj.type === action.payload.type))
             });
-            if (findItem){
+            if (findItem) {
                 state.cartPriceTotal -= findItem.totalPrice * findItem.count;
             }
             state.items = state.items.filter(obj => {
@@ -75,16 +60,16 @@ export const cartSlice = createSlice({
         addItem: (state, action: PayloadAction<ICartItem>) => {
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
             findItem && findItem.count++;
-            if (findItem){
-            state.cartPriceTotal += findItem.totalPrice;
+            if (findItem) {
+                state.cartPriceTotal += findItem.totalPrice;
             }
         },
         // -1 к счетчику на страничке корзины
         removeItem: (state, action: PayloadAction<ICartItem>) => {
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
             findItem && findItem.count--;
-            if (findItem){
-            state.cartPriceTotal -= findItem.totalPrice;
+            if (findItem) {
+                state.cartPriceTotal -= findItem.totalPrice;
             }
         },
     }

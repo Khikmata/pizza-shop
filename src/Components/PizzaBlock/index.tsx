@@ -1,13 +1,15 @@
-import React, { FC, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { FC, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import { addToCart, ICartItem } from '../../redux/reducers/cartSlice';
-import { IPizza } from '../../redux/reducers/fetchItemSlice';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { addToCart, } from '../../redux/reducers/cart/cartSlice';
+import { ICartItem } from '../../redux/reducers/cart/types';
+import { } from '../../redux/reducers/fetchItems/fetchItemSlice';
+import { IPizza } from '../../redux/reducers/fetchItems/types';
+import { useAppDispatch } from '../../redux/store';
 
 
-export const PizzaBlock:FC<IPizza> = (props) => {
+export const PizzaBlock: FC<IPizza> = (props) => {
 
     //вытаскивание  пропсов
     const id = props.id;
@@ -38,7 +40,7 @@ export const PizzaBlock:FC<IPizza> = (props) => {
 
     const totalPrice = Math.round(Math.floor(props.price * multiplier[activeSize]) / 10) * 10;
 
-    const cartItem = useSelector((state:RootState) =>
+    const cartItem = useTypedSelector((state) =>
         state.cartSlice.items.find(
             (obj: ICartItem) =>
                 obj.id === id &&
@@ -53,12 +55,12 @@ export const PizzaBlock:FC<IPizza> = (props) => {
     const [addItem, setAddItem] = useState(0)
 
     const buyPizza = () => {
-        
+
 
         const item: ICartItem = {
             id,
             title,
-            price ,
+            price,
             imageUrl,
             type: doughType[activeType],
             size: pizzaSizes[activeSize],
