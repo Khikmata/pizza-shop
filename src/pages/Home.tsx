@@ -1,10 +1,9 @@
 import React from 'react'
 
 import { useEffect } from 'react';
-import Categories from '../Components/Categories'
-import Sort from '../Components/Sort'
-import PizzaBlock from '../Components/PizzaBlock'
-import { Skeleton } from '../Components/PizzaBlock/Skeleton'
+
+import { Categories, Sort, PizzaBlock, Skeleton } from '../Components'
+
 
 import { setCategoryIndex, } from '../redux/reducers/filter/filterSlice';
 import { getPizzas } from '../redux/reducers/fetchItems/fetchItemSlice';

@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 
 const PizzaPage: React.FC = () => {
 
-    const [pizza, setPizza] = useState({title:'', description: '', imageUrl: '', price: 0});
+    const [pizza, setPizza] = useState({ title: '', description: '', imageUrl: '', price: 0 });
     const [isItPizza, setIsItPizza] = useState(true)
 
 
@@ -47,8 +47,8 @@ const PizzaPage: React.FC = () => {
                     </div>
                 </div>
                 :
-                <div className='pizza-notexist'>
-                    <h2>Такой пиццы не существует 🐱</h2>
+                <div className='pizza-notexist pizza-page container'>
+                    <h2 className='pizza-page__title'>Такой пиццы не существует 🐱</h2>
                     <div className="cart__bottom-buttons" >
                         <Link to={'/'} className="button button--outline go-back-btn notexist-btn" >
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
