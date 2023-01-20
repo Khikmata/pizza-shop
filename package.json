@@ -1,7 +1,7 @@
 {
   "name": "react-pizza",
   "version": "0.1.0",
-  "homepage": "https://Khikmata.github.io/pizza-shop",
+  "homepage": "https://pizza-shop-gamma-smoky.vercel.app/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
