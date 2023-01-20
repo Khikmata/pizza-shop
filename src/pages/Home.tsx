@@ -42,8 +42,10 @@ const Home:React.FC = () => {
             dispatch(getPizzas({ categoryFilter, sortType, sortOrder, searchValue }))
         }
         fetchPizzas();
+
     }, [categoryIndex, sortType, searchValue, sortOrder, categoryFilter]);
 
+    console.log(items)
     //Верстка
     return (
         <>
@@ -69,10 +71,18 @@ const Home:React.FC = () => {
                             <div className="content__items">
                                 {status === 'loading'
                                     ? [...new Array(8)].map((_, index) => <Skeleton key={index} />)
-                                    : items.map((item, index:number) => (<PizzaBlock key={index} {...item} />))
+                                    : items.map((item, index:number) => (<PizzaBlock key={index} {...item} />))                      
                                 }
-                            </div>
+                            </div> 
                     }
+                    {
+                    (items.length === 0 && status !== 'loading' &&                         
+                    <div> 
+                        <h2 className={'items_notFound'}>
+                        К сожалению, по таким настройкам ничего не найдено 
+                        </h2> 
+                    </div>)
+                    }                   
                 </div>
             </div>
         </>

@@ -27,6 +27,7 @@ export const getPizzas = createAsyncThunk<IPizza[], IFetchPizza>(
     'getPizza/pizzaFetchStatus',
     async (params) => {
         const { categoryFilter, sortType, sortOrder, searchValue } = params;
+        
         const {data} = await axios.get<IPizza[]>(`https://63bb40aa32d17a50908b3902.mockapi.io/items?${categoryFilter}&sortBy=${sortType}&order=${sortOrder ? 'asc' : 'desc'}&search=${searchValue}`)
         return data;
     }

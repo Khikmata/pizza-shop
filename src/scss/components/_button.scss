@@ -32,15 +32,9 @@ padding-top: 250px;
     color: #fff;
   }
 
-  i,
-  span,
-  path,
-  svg {
-
-  }
-
   &:hover {
     background-color: darken($orange, 8%);
+
   }
 
   &:active {
