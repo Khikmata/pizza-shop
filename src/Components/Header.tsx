@@ -29,13 +29,14 @@ return (
                     </div>
                 </Link>
             </div>
-            {location.pathname !== '/cart' &&
+            {location.pathname === '/' &&
                 <div className='centre'>
                     <div className='centre__components'>
                         <Search />
                         <DarkTheme />
                     </div>
-                </div>}
+                </div>
+            }
             <div className='right'>
                 {location.pathname !== '/cart' ? <div className="header__cart">
                     <Link to={{ pathname: "/cart" }} className="button button--cart">
@@ -76,7 +77,8 @@ return (
                     <div className='centre__components'>
                         <DarkTheme />
                     </div>
-                </div>}
+                </div>
+                }
             </div>
         </div>
     </div >

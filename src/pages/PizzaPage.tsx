@@ -27,6 +27,7 @@ const PizzaPage: React.FC = () => {
 
     return (
         <>
+
             {isItPizza
                 ? < div className='pizza-page container'>
                     <div className="pizza-page-left">
