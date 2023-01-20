@@ -12,6 +12,7 @@ export interface IPizza {
     types: number[];
     rating: number;
     description: string;
+    totalPrice: number;
 }
 
 export interface IFetchPizza{

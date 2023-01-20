@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import themeSlice, { setIsNightMode } from '../../redux/reducers/themeSlice';
+import { useAppDispatch } from '../../redux/store';
 import styles from './DarkTheme.scss'
 
 const DarkTheme = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const isNightMode = useSelector(state => state.themeSlice.isNightMode)
 
 

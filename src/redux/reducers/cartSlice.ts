@@ -11,6 +11,7 @@ export interface ICartItem{
     type: string;
     size: string;
     count: number;
+    totalPrice: number;
 }
 
 interface ICartInitState {
@@ -25,6 +26,9 @@ const initialState:ICartInitState = {
     totalCount: 0,
 }
 
+
+
+
 export const cartSlice = createSlice({
     name: 'cart',
     initialState,
@@ -32,13 +36,13 @@ export const cartSlice = createSlice({
 
         //Добавить пиццу с главной
         addToCart: (state, action: PayloadAction<ICartItem>) => {
-
+   
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
 
             (findItem) ? findItem.count++ : state.items.push({ ...action.payload, count: 1 })
 
             state.cartPriceTotal = state.items.reduce((sum, obj) => {
-                return (obj.price * obj.count) + sum;
+                return (obj.totalPrice * obj.count) + sum;
             }, 0)
         },
         // Удалить пиццу с корзины
@@ -53,7 +57,7 @@ export const cartSlice = createSlice({
                     (obj.type === action.payload.type))
             });
             if (findItem){
-                state.cartPriceTotal -= findItem.price * findItem.count;
+                state.cartPriceTotal -= findItem.totalPrice * findItem.count;
             }
             state.items = state.items.filter(obj => {
                 return ((obj.id !== action.payload.id) ||
@@ -72,7 +76,7 @@ export const cartSlice = createSlice({
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
             findItem && findItem.count++;
             if (findItem){
-            state.cartPriceTotal += findItem.price;
+            state.cartPriceTotal += findItem.totalPrice;
             }
         },
         // -1 к счетчику на страничке корзины
@@ -80,11 +84,15 @@ export const cartSlice = createSlice({
             const findItem = state.items.find(obj => obj.id === action.payload.id && obj.size === action.payload.size && obj.type === action.payload.type);
             findItem && findItem.count--;
             if (findItem){
-            state.cartPriceTotal -= findItem.price;
+            state.cartPriceTotal -= findItem.totalPrice;
             }
         },
     }
 });
+
+
+
+
 
 export const { addToCart, removeFromCart, clearCart, addItem, removeItem } = cartSlice.actions;
 

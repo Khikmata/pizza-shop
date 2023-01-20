@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useDebounce } from '../../hooks/useThrottle'
 import { setSearchValue } from '../../redux/reducers/searchSlice'
+import { useAppDispatch } from '../../redux/store'
 import styles from './Search.module.scss'
 
 
 
 const Search:React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
 
     const [value, setValue] = useState<string>('')

@@ -1,21 +1,22 @@
 import { type } from '@testing-library/user-event/dist/type';
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ISort, setSortType, toggleOrderBy, } from '../redux/reducers/filterSlice';
-import { RootState } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
+
 
 
 
 export const sortStates:ISort[] = [
-    { name: 'популярности', sortValue: 'rating' },
-    { name: 'цене', sortValue: 'price' },
-    { name: 'алфавиту', sortValue: 'title' },
+    { name: 'популярности', sortValue: 'rating', orderBy: true },
+    { name: 'цене', sortValue: 'price', orderBy: true },
+    { name: 'алфавиту', sortValue: 'title', orderBy: true },
 ]
 
 const Sort = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const sort = useSelector((state: RootState) => state.filterSlice.sort);
 

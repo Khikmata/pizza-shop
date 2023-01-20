@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react'
+
 import { Link } from 'react-router-dom';
-import { setIsNightMode } from '../redux/reducers/themeSlice';
-import { RootState } from '../redux/store';
+
 import DarkTheme from '../Components/theme/DarkTheme';
 
 const NotFoundPage:React.FC = () => {

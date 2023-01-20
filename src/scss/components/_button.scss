@@ -1,6 +1,8 @@
 @import '../variables';
 
 
+
+
 .cart-empty{
   font-size: 36px;
 
@@ -17,8 +19,9 @@ padding-top: 250px;
   padding: 10px 20px;
   min-width: 40px;
   text-align: center;
+
+
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
   @media(max-width: 420px) {
@@ -33,7 +36,7 @@ padding-top: 250px;
   span,
   path,
   svg {
-    transition: all $duration ease-in-out;
+
   }
 
   &:hover {

@@ -5,13 +5,11 @@ import Categories from '../Components/Categories'
 import Sort from '../Components/Sort'
 import PizzaBlock from '../Components/PizzaBlock'
 import { Skeleton } from '../Components/PizzaBlock/Skeleton'
-
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setCategoryIndex, } from '../redux/reducers/filterSlice';
-import { getPizzas, IFetchPizza } from '../redux/reducers/fetchItemSlice';
+import { getPizzas } from '../redux/reducers/fetchItemSlice';
 import { RootState, useAppDispatch } from '../redux/store';
-import { ICartItem } from '../redux/reducers/cartSlice';
+
 
 
 
@@ -25,7 +23,7 @@ const Home:React.FC = () => {
 
     //Фильтры для поиска
     const searchValue = useSelector((state: RootState) => state.searchSlice.searchValue)
-    
+
     const sortType = useSelector((state: RootState) => state.filterSlice.sort.sortValue);
     const sortOrder = useSelector((state: RootState) => state.filterSlice.sort.orderBy)
     const categoryIndex = useSelector((state: RootState) => state.filterSlice.categoryIndex);

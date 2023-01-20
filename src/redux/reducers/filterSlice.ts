@@ -5,7 +5,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 export interface ISort{
     name: string;
     sortValue: 'rating' | 'title' | 'price';
-    orderBy?: boolean;
+    orderBy: boolean;
 }
 
 

@@ -5,9 +5,13 @@
 
 $background: #e8c7bf;
 
+*{
+  transition: all 0.1s ease-in-out;
+}
+
 body {
   background-color: #e8c7bf;
-  transition: all 0.1s ease-in-out;
+
 
 }
 
@@ -54,6 +58,22 @@ body {
   background-color: #202020;
 
   $background: #202020;
+  .disabled {
+    &:active{
+      transform: none;
+    }
+    &.button--outline{
+      background-color: rgba(95, 95, 95, 0.1);
+      border-color: rgba(136, 136, 136, 0.4);
+  
+      svg {
+        path {
+          fill: rgba(136, 136, 136, 0.4);
+        }
+      }
+  
+    }
+  }
 
 .notFound{
   h1{
@@ -444,15 +464,15 @@ margin-right: 25px;
       align-items: center;
       justify-content: space-between;
       width: 17%;
-@media(max-width:600px){
-  width: 28%;
-}
-@media(max-width:400px){
-  width: 60%;
-}
+      @media(max-width:600px){
+        width: 28%;
+      }
+      @media(max-width:400px){
+        width: 60%;
+      }
       &-minus {
         svg {
-          
+
           path:first-of-type {
             display: none;
           }
@@ -722,4 +742,21 @@ h2{
 }
 .notexist-btn{
   margin-top: 20px;
+}
+
+.disabled {
+  &:active{
+    transform: none;
+  }
+  &.button--outline{
+    background-color: rgba(226, 226, 226, 0.1);
+    border-color: rgba(141, 141, 141, 0.4);
+
+    svg {
+      path {
+        fill: rgba(141, 141, 141, 0.4);
+      }
+    }
+
+  }
 }

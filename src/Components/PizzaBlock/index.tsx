@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { addToCart, ICartItem } from '../../redux/reducers/cartSlice';
 import { IPizza } from '../../redux/reducers/fetchItemSlice';
-import { RootState } from '../../redux/store';
+import { RootState, useAppDispatch } from '../../redux/store';
 
 
 export const PizzaBlock:FC<IPizza> = (props) => {
@@ -14,8 +14,8 @@ export const PizzaBlock:FC<IPizza> = (props) => {
     const title = props.title;
     const price = props.price;
     const imageUrl = props.imageUrl;
-const types = props.types;
-const sizes = props.sizes;
+    const types = props.types;
+    const sizes = props.sizes;
 
     //определяем тип теста
     const doughType = [
@@ -29,9 +29,14 @@ const sizes = props.sizes;
         '40',
     ]
 
+    const multiplier = [1, 1.13, 1.46]
+
+
 
     const [activeType, setActiveType] = useState(types[0]);
     const [activeSize, setActiveSize] = useState(0);
+
+    const totalPrice = Math.round(Math.floor(props.price * multiplier[activeSize]) / 10) * 10;
 
     const cartItem = useSelector((state:RootState) =>
         state.cartSlice.items.find(
@@ -43,23 +48,22 @@ const sizes = props.sizes;
     );
 
     const count = cartItem ? cartItem.count : 0;
-    const dispatch = useDispatch()
-
-
+    const dispatch = useAppDispatch()
 
     const [addItem, setAddItem] = useState(0)
 
-
-
     const buyPizza = () => {
+        
+
         const item: ICartItem = {
             id,
             title,
-            price,
+            price ,
             imageUrl,
             type: doughType[activeType],
             size: pizzaSizes[activeSize],
             count,
+            totalPrice,
         }
 
         dispatch(addToCart(item))
@@ -96,7 +100,7 @@ const sizes = props.sizes;
                     </ul>
                 </div>
                 <div className="pizza-block__bottom">
-                    <div className="pizza-block__price">от {price} ₽</div>
+                    <div className="pizza-block__price">от {totalPrice} ₽</div>
                     <div onClick={buyPizza} className="button button--outline button--add">
                         {/* <svg
                             width="12"
