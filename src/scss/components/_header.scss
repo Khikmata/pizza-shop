@@ -44,7 +44,7 @@ justify-content: flex-start;
   }
 
   width: 100%;
-  @media (max-width: 600px)
+  @media (max-width: 800px)
     {
     display: none;
     }
@@ -65,7 +65,7 @@ justify-content: flex-start;
 }
 .header {
   border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  padding: 40px 20px;
 
   .container {
     display: flex;
