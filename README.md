@@ -1,7 +1,6 @@
 # Магазин пиццы
 
-npm install
-npm start
+Deployed and ready: https://pizza-shop-pi.vercel.app/
 
 Магазин пиццы в React/Redux/Typescript
 
