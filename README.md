@@ -1,6 +1,6 @@
 # Магазин пиццы 🍕
 
-Deployed and ready ➡: https://pizza-shop-pi.vercel.app/
+Deployed and ready ➡: https://pizza-shop-gamma-smoky.vercel.app/
 
 Магазин пиццы в React/Redux/Typescript
 
